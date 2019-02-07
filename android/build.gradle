@@ -1,0 +1,64 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        buildToolsVersion = "28.0.3"
+        minSdkVersion = 16
+        compileSdkVersion = 27
+        targetSdkVersion = 26
+        supportLibVersion = "27.1.1"
+    }
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        mavenLocal()
+        google()
+        jcenter()
+        maven {
+            url "https://jitpack.io"
+        }
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url "$rootDir/../node_modules/react-native/android"
+        }
+    }
+}
+
+subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion 27
+                buildToolsVersion '28.0.3'
+            }
+        }
+    }
+}
+
+subprojects {project ->
+    if (project.name.contains('react-native-blur')
+        || project.name.contains('react-native-svg')
+        || project.name.contains('react-native-text-size')) {
+        buildscript {
+            repositories {
+                maven { url "https://dl.bintray.com/android/android-tools/"  }
+            }    
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4'
+    distributionUrl = distributionUrl.replace("bin", "all")
+}
