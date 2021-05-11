@@ -22,7 +22,7 @@
     "@nart/react-native-swiper": "^1.5.13",
     "autobind-decorator": "^2.4.0",
     "axios": "^0.18.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "lottie-react-native": "^2.5.11",
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",
